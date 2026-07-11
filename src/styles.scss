@@ -1,1 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
+@use 'assets/styles/palette' as palette;
+
+@import "assets/styles/fonts";
+@import "assets/styles/normalize";
+@import "assets/styles/vars";
+
+:root {
+  font-family: 'Inter', sans-serif;
+  background-color: palette.$gray-color-1;
+  font-size: 16px;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

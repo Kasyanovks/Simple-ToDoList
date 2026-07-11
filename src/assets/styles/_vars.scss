@@ -1,0 +1,5 @@
+@use 'palette' as palette;
+
+$border: 1px solid palette.$gray-color-1;
+$border-radius: 8px;
+$transition-duration: .2s;
