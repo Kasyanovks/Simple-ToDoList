@@ -26,3 +26,6 @@
 ## Цель проекта
 
 Основная цель проекта — практическое освоение базовых принципов Angular.
+
+## Макет проекта
+Верстаю по макету https://www.figma.com/design/B4vCXHLUw79FtgLQyiy2s5/To-Do-List?t=EQoH0EIlKvxOsmsw-0
