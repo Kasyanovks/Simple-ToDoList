@@ -1,0 +1,23 @@
+@use '../../assets/styles/palette' as palette;
+@use '../../assets/styles/vars' as var;
+
+.to-do-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 24px;
+  background-color: palette.$light-color;
+  border: var.$border;
+  border-radius: var.$border-radius;
+  box-shadow: 0 4px 4px -4px rgba(12, 12, 13, 0.05), 0 16px 32px -4px rgba(12, 12, 13, 0.1);
+  min-width: 320px;
+  justify-content: center;
+  align-items: center;
+
+  &__title {
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+}

@@ -1,0 +1,50 @@
+@use '../../assets/styles/vars' as var;
+@use '../../assets/styles/palette' as palette;
+
+:host {
+  width: 100%;
+}
+
+.to-do-list {
+
+  &__form {
+    display: flex;
+    gap: 16px;
+    position: relative;
+    font-size: 16px;
+    font-weight: 400;
+    width: 100%;
+
+    &:has(.to-do-list__input:not(:placeholder-shown)) .to-do-list__label,
+    &:has(.to-do-list__input:focus) .to-do-list__label {
+      scale: 0.7;
+      translate: -1.3em -2em;
+    }
+  }
+
+  &__input {
+    border: var.$border;
+    border-radius: var.$border-radius;
+    width: 100%;
+    min-height: 42px;
+  }
+
+  &__label {
+    position: absolute;
+    color: palette.$gray-color-2;
+    top: 50%;
+    left: 10px;
+    transform: translate(-0%, -50%);
+    transition-duration: var.$transition-duration;
+  }
+
+  &__button {
+    border: 1px solid palette.$dark-color-2;
+    background-color: palette.$dark-color-2;
+    color: palette.$gray-color-1;
+    font-weight: 400;
+    line-height: 1;
+    border-radius: var.$border-radius;
+    padding: 12px;
+  }
+}
