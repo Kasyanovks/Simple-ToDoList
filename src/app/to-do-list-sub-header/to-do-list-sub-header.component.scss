@@ -1,0 +1,19 @@
+@use '../../assets/styles/palette' as palette;
+@use '../../assets/styles/vars' as var;
+
+:host {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  font-weight: 600;
+}
+
+.to-do-list__delete-all {
+  border: none;
+  background-color: transparent;
+
+  &:hover {
+    color: palette.$gray-color-2;
+  }
+}

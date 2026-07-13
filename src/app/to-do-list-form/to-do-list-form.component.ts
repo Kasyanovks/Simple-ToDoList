@@ -16,4 +16,6 @@ export class ToDoListFormComponent {
   @Input({required: true}) placeHolder!: string
 
   @Input({required: true}) id!: string
+
+  @Input({required: true}) type!: string
 }

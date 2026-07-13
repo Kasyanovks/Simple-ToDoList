@@ -1,6 +1,6 @@
 <form class="to-do-list__form">
   <label for="{{ id }}" class="to-do-list__label">{{ placeHolder }}</label>
-  <input type="text" id="{{ id }}" class="to-do-list__input" placeholder=" ">
+  <input type="{{ type }}" id="{{ id }}" class="to-do-list__input" placeholder=" ">
   @if (showButton) {
     <app-black-button buttonText="Add"></app-black-button>
   }

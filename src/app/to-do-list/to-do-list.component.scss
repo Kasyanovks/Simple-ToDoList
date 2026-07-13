@@ -20,4 +20,11 @@
     line-height: 1.2;
     letter-spacing: -0.02em;
   }
+
+  &__tasks-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
 }

@@ -1,0 +1,64 @@
+@use '../../assets/styles/palette' as palette;
+@use '../../assets/styles/vars' as var;
+
+:host {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: var.$border;
+  border-width: 2px;
+  border-radius: var.$border-radius;
+  padding: 12px 10px;
+}
+
+.to-do-list__task {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition-duration: var.$transition-duration;
+}
+
+.to-do-list__checkbox {
+  appearance: none;
+  position: relative;
+  width: 20px;
+  aspect-ratio: 1;
+  border: 1px solid palette.$dark-color-2;
+  border-radius: 4px;
+}
+
+.to-do-list__checkbox::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 0;
+  background: url("../../assets/icons/done-icon.svg") center/contain no-repeat;
+  top: 45%;
+  left: 50%;
+  transform: translate(-45%, -50%);
+  transition-duration: var.$transition-duration;
+}
+
+.to-do-list__checkbox:checked{
+  background-color: palette.$dark-color-2;
+
+  &::after {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+.to-do-list__task:has(.to-do-list__checkbox:checked) .to-do-list__task-title {
+  text-decoration-line: line-through;
+  color: palette.$gray-color-2;
+}
+
+.to-do-list__delete-task {
+  border: none;
+  background-color: transparent;
+  color: palette.$gray-color-2;
+
+  &:hover {
+    color: palette.$dark-color-1;
+  }
+}

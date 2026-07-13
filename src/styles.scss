@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @use 'assets/styles/palette' as palette;
+@use 'assets/styles/vars' as var;
 
 @import "assets/styles/fonts";
 @import "assets/styles/normalize";
@@ -15,4 +16,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+button, a {
+  transition-duration: var.$transition-duration;
 }
