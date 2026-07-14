@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import {Component, signal} from '@angular/core';
 import {ToDoListFormComponent} from "../to-do-list-form/to-do-list-form.component";
 import {ToDoListSubHeaderComponent} from "../to-do-list-sub-header/to-do-list-sub-header.component";
 import {ToDoListTaskComponent} from "../to-do-list-task/to-do-list-task.component";
+import {Task} from "../../models/task";
+import {TasksService} from "../../services/tasks.service";
 
 
 @Component({
@@ -16,5 +18,10 @@ import {ToDoListTaskComponent} from "../to-do-list-task/to-do-list-task.componen
   styleUrl: './to-do-list.component.scss'
 })
 export class ToDoListComponent {
+  constructor(private tasksService: TasksService ) {
+  }
 
+
+  protected tasksList: Task[] = this.tasksService.getTasksFromLocalStorage()
+  protected readonly String = String;
 }
