@@ -1,7 +1,7 @@
-<form class="to-do-list__form">
+<form class="to-do-list__form" (ngSubmit)="addTask()">
   <label for="{{ id }}" class="to-do-list__label">{{ placeHolder }}</label>
-  <input type="{{ type }}" id="{{ id }}" class="to-do-list__input" placeholder=" ">
+  <input type="{{ type }}" id="{{ id }}" class="to-do-list__input" [(ngModel)]="task" name="task"  placeholder=" ">
   @if (showButton) {
-    <app-black-button buttonText="Add"></app-black-button>
+    <app-black-button buttonText="Add" type="submit"></app-black-button>
   }
 </form>

@@ -37,6 +37,7 @@
     left: 10px;
     transform: translate(-0%, -50%);
     transition-duration: var.$transition-duration;
+    pointer-events: none;
   }
 
   &__button {

@@ -1,16 +1,22 @@
 import {booleanAttribute, Component, Input} from '@angular/core';
 import {BlackButtonComponent} from "../black-button/black-button.component";
+import {FormsModule} from "@angular/forms";
+import {TasksService} from "../../services/tasks.service";
 
 @Component({
   selector: 'app-to-do-list-form',
   standalone: true,
   imports: [
-    BlackButtonComponent
+    BlackButtonComponent,
+    FormsModule
   ],
   templateUrl: './to-do-list-form.component.html',
   styleUrl: './to-do-list-form.component.scss'
 })
 export class ToDoListFormComponent {
+  constructor(private taskService: TasksService) {
+  }
+
   @Input({transform: booleanAttribute}) protected showButton = false
 
   @Input({required: true}) placeHolder!: string
@@ -18,4 +24,14 @@ export class ToDoListFormComponent {
   @Input({required: true}) id!: string
 
   @Input({required: true}) type!: string
+
+  protected task: string | undefined
+
+
+  addTask() {
+    if (this.task === undefined || this.task === '' || this.task === null) return
+
+    this.taskService.addTaskToLocalStorage(this.taskService.tasks().length, this.task!)
+    this.task = ''
+  }
 }
