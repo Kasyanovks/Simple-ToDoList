@@ -1,4 +1,4 @@
-import {effect, Injectable, signal} from '@angular/core';
+import {computed, effect, Injectable, signal} from '@angular/core';
 import { Task } from "../models/task";
 
 @Injectable({
@@ -8,6 +8,7 @@ export class TasksService {
   private toDoListKey: string = 'ToDoListANGULAR';
   private _tasks = signal<Task[]>(this.getTasksFromLocalStorage())
   readonly tasks = this._tasks.asReadonly()
+  readonly totalTasks = computed(() => this._tasks().length)
 
   constructor() {
     effect(() => {

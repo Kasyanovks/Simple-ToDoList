@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, Input, signal} from '@angular/core';
 import {TasksService} from "../../services/tasks.service";
 
 @Component({
@@ -11,6 +11,8 @@ import {TasksService} from "../../services/tasks.service";
 export class ToDoListSubHeaderComponent {
   constructor(protected taskService: TasksService) {
   }
+
+  protected total = this.taskService.totalTasks
 
 
   deleteTasks() {

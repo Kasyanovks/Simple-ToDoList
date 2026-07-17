@@ -27,4 +27,8 @@
     flex-direction: column;
     gap: 8px;
   }
+
+  &__empty-message {
+    text-align: center;
+  }
 }
