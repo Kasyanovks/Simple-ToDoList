@@ -28,7 +28,7 @@ jobs:
 
       - run: npm ci
 
-      - run: npm run build -- --configuration production --base-href="/<имя-репозитория>/"
+      - run: npm run build -- --configuration production --base-href="/Simple-ToDoList/"
 
       - uses: actions/configure-pages@v5
 
