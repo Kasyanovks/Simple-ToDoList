@@ -1,24 +1,21 @@
-import {Injectable, signal} from '@angular/core';
+import {effect, Injectable, signal} from '@angular/core';
 import { Task } from "../models/task";
 
 @Injectable({
   providedIn: 'root'
 })
 export class TasksService {
-
   private toDoListKey: string = 'ToDoListANGULAR';
-
-  constructor(
-
-  ) { }
-
-  private _tasks = signal<Task[]>(
-    this.getTasksFromLocalStorage()
-  )
-
+  private _tasks = signal<Task[]>(this.getTasksFromLocalStorage())
   readonly tasks = this._tasks.asReadonly()
 
-  getTasksFromLocalStorage(): Task[]{
+  constructor() {
+    effect(() => {
+      localStorage.setItem(this.toDoListKey, JSON.stringify(this._tasks()))
+    });
+  }
+
+  private getTasksFromLocalStorage(): Task[]{
     const taskString = localStorage.getItem(this.toDoListKey)
 
     if (!taskString) return [] as Task[]
@@ -26,7 +23,7 @@ export class TasksService {
     return JSON.parse(taskString) as Task[]
   }
 
-  addTaskToLocalStorage(id: number, content: string) {
+  addNewTask(id: number, content: string) {
     const task: Task = {
       id: id,
       content: content
@@ -45,7 +42,9 @@ export class TasksService {
     }
   }
 
-  showAllTasks() {
-    return  signal<Task[]>  (this.getTasksFromLocalStorage())
+  deleteAllTasks() {
+    this._tasks.set([])
+    localStorage.setItem(this.toDoListKey, JSON.stringify(this._tasks))
   }
+
 }

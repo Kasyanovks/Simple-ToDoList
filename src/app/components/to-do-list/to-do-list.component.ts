@@ -22,7 +22,6 @@ export class ToDoListComponent implements OnInit{
   }
 
   ngOnInit() {
-
   }
 
   protected readonly tasksList = this.tasksService.tasks

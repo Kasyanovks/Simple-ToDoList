@@ -28,10 +28,10 @@ export class ToDoListFormComponent {
   protected task: string | undefined
 
 
-  addTask() {
+  protected addTask() {
     if (this.task === undefined || this.task === '' || this.task === null) return
 
-    this.taskService.addTaskToLocalStorage(this.taskService.tasks().length, this.task!)
+    this.taskService.addNewTask(this.taskService.tasks().length, this.task!)
     this.task = ''
   }
 }
