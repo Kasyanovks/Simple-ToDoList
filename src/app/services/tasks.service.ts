@@ -23,7 +23,7 @@ export class TasksService {
     return JSON.parse(taskString) as Task[]
   }
 
-  addNewTask(id: number, content: string) {
+  addNewTask(id: string, content: string) {
     const task: Task = {
       id: id,
       content: content
@@ -47,4 +47,9 @@ export class TasksService {
     localStorage.setItem(this.toDoListKey, JSON.stringify(this._tasks))
   }
 
+  deleteTask(id: string) {
+    this._tasks.set(this._tasks().filter(task => {
+      return task.id !== id
+    }))
+  }
 }

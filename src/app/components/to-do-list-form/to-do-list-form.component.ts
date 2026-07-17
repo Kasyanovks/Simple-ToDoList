@@ -31,7 +31,7 @@ export class ToDoListFormComponent {
   protected addTask() {
     if (this.task === undefined || this.task === '' || this.task === null) return
 
-    this.taskService.addNewTask(this.taskService.tasks().length, this.task!)
+    this.taskService.addNewTask(Date.now().toString(36) + Math.random().toString(36).substr(2, 5), this.task!)
     this.task = ''
   }
 }
