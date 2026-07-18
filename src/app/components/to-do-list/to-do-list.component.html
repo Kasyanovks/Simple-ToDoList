@@ -7,7 +7,7 @@
   </form>
   <form class="to-do-list__form">
     <label for="search-task" class="to-do-list__label">Search task</label>
-    <input type="text" id="search-task" class="to-do-list__input" placeholder=" ">
+    <input type="search" (input)="onInput($event)"  id="search-task" class="to-do-list__input" placeholder=" ">
   </form>
   <app-to-do-list-sub-header></app-to-do-list-sub-header>
   <div class="to-do-list__tasks-wrapper">

@@ -53,4 +53,10 @@ export class TasksService {
       return task.id !== id
     }))
   }
+
+  findTask(value: string) {
+    this._tasks.set(this._tasks().filter(task => {
+      return task.content.includes(value)
+    }))
+  }
 }

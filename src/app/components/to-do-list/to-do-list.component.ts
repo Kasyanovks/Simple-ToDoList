@@ -32,11 +32,16 @@ export class ToDoListComponent implements OnInit{
 
   protected task: string | undefined
 
-
   protected addTask() {
     if (this.task === undefined || this.task === '' || this.task === null) return
 
     this.taskService.addNewTask(Date.now().toString(36) + Math.random().toString(36).substr(2, 5), this.task!)
     this.task = ''
+  }
+
+  protected onInput(event: Event) {
+    const value = (event.target as HTMLInputElement).value
+
+    this.taskService.findTask(value)
   }
 }
