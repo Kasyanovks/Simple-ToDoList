@@ -1,20 +1,18 @@
 <div class="to-do-list">
   <h1 class="to-do-list__title">To Do List</h1>
-  <app-to-do-list-form
-    type="text"
-    placeHolder="New task title"
-    id="new-task"
-    showButton
-  ></app-to-do-list-form>
-  <app-to-do-list-form
-    type="search"
-    placeHolder="Search task"
-    id="search-task"
-  ></app-to-do-list-form>
+  <form class="to-do-list__form" (ngSubmit)="addTask()">
+    <label for="add-task" class="to-do-list__label">New task title</label>
+    <input type="text" id="add-task" class="to-do-list__input" [(ngModel)]="task" name="task"  placeholder=" ">
+    <app-black-button buttonText="Add" type="submit"></app-black-button>
+  </form>
+  <form class="to-do-list__form">
+    <label for="search-task" class="to-do-list__label">Search task</label>
+    <input type="text" id="search-task" class="to-do-list__input" placeholder=" ">
+  </form>
   <app-to-do-list-sub-header></app-to-do-list-sub-header>
   <div class="to-do-list__tasks-wrapper">
     @for (item of tasksList(); track item.id) {
-      <app-to-do-list-task [id]=item.id  content="{{ item.content }}"></app-to-do-list-task>
+      <app-to-do-list-task [id]=item.id content="{{ item.content }}"></app-to-do-list-task>
     } @empty {
       <p class="to-do-list__empty-message">
         You don't have tasks yet!
