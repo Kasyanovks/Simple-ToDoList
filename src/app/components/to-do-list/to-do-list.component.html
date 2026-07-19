@@ -12,7 +12,7 @@
   <app-to-do-list-sub-header></app-to-do-list-sub-header>
   <div class="to-do-list__tasks-wrapper">
     @for (item of dataToShow(); track item.id) {
-      <app-to-do-list-task [id]=item.id content="{{ item.content }}"></app-to-do-list-task>
+      <app-to-do-list-task [id]=item.id [isChecked]="item.isChecked" content="{{ item.content }}"></app-to-do-list-task>
     } @empty {
       <p class="to-do-list__empty-message">
         You don't have tasks yet!

@@ -1,5 +1,5 @@
 <div class="to-do-list__task">
-  <input type="checkbox" class="to-do-list__checkbox" id="{{ id }}">
+  <input type="checkbox" (input)="checkedOrNot(id)" class="to-do-list__checkbox" id="{{ id }}" [checked]="isChecked">
   <label for="{{ id }}" class="to-do-list__task-title">{{ content }}</label>
 </div>
 <button class="to-do-list__delete-task" (click)="delete(id)">

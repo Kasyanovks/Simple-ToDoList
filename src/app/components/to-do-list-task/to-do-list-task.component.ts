@@ -9,10 +9,15 @@ import {TasksService} from "../../services/tasks.service";
   styleUrl: './to-do-list-task.component.scss'
 })
 export class ToDoListTaskComponent {
+  constructor(protected taskService: TasksService) {
+  }
+
   @Input() id!: string
   @Input() content!: string
+  @Input() isChecked!: boolean
 
-  constructor(protected taskService: TasksService) {
+  protected checkedOrNot(id: string) {
+    this.taskService.toggleCheckTask(id)
   }
 
   protected delete(id: string) {

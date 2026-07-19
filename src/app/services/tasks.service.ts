@@ -24,10 +24,11 @@ export class TasksService {
     return JSON.parse(taskString) as Task[]
   }
 
-  addNewTask(id: string, content: string) {
+  addNewTask(id: string, content: string, isChecked: boolean) {
     const task: Task = {
       id: id,
-      content: content
+      content: content,
+      isChecked: isChecked
     }
 
     if (this._tasks().length === 0) {
@@ -54,9 +55,10 @@ export class TasksService {
     }))
   }
 
-  findTask(value: string) {
-    this._tasks.set(this._tasks().filter(task => {
-      return task.content.includes(value)
+  toggleCheckTask(id: string) {
+    this._tasks.set(this._tasks().map(task => {
+      if (task.id === id) task.isChecked = !task.isChecked
+      return task
     }))
   }
 }

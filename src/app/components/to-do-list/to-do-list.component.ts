@@ -43,7 +43,7 @@ export class ToDoListComponent implements OnInit{
   protected addTask() {
     if (this.task === undefined || this.task === '' || this.task === null) return
 
-    this.taskService.addNewTask(Date.now().toString(36) + Math.random().toString(36).substr(2, 5), this.task!)
+    this.taskService.addNewTask(Date.now().toString(36) + Math.random().toString(36).substr(2, 5), this.task!, false)
     this.task = ''
   }
 
