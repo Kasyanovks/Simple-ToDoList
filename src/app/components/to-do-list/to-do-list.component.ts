@@ -1,4 +1,4 @@
-import {Component, signal, OnInit, Input} from '@angular/core';
+import {Component, signal, OnInit, Input, WritableSignal, computed, Signal} from '@angular/core';
 import {ToDoListSubHeaderComponent} from "../to-do-list-sub-header/to-do-list-sub-header.component";
 import {ToDoListTaskComponent} from "../to-do-list-task/to-do-list-task.component";
 import {Task} from "../../models/task";
@@ -28,6 +28,14 @@ export class ToDoListComponent implements OnInit{
   }
 
   protected readonly tasksList = this.taskService.tasks
+  private searchQuery: WritableSignal<string> = signal('')
+
+
+  protected dataToShow= computed(() => {
+    return this.tasksList().filter(task => {
+      return task.content.toLowerCase().includes(this.searchQuery().toLowerCase())
+    })
+  })
 
 
   protected task: string | undefined
@@ -39,9 +47,8 @@ export class ToDoListComponent implements OnInit{
     this.task = ''
   }
 
-  protected onInput(event: Event) {
-    const value = (event.target as HTMLInputElement).value
-
-    this.taskService.findTask(value)
+  protected onInput(value: string) {
+    this.searchQuery.set(value)
   }
+
 }

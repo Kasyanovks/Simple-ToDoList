@@ -7,11 +7,11 @@
   </form>
   <form class="to-do-list__form">
     <label for="search-task" class="to-do-list__label">Search task</label>
-    <input type="search" (input)="onInput($event)"  id="search-task" class="to-do-list__input" placeholder=" ">
+    <input type="search" #search (input)="onInput(search.value)" id="search-task" class="to-do-list__input" placeholder=" ">
   </form>
   <app-to-do-list-sub-header></app-to-do-list-sub-header>
   <div class="to-do-list__tasks-wrapper">
-    @for (item of tasksList(); track item.id) {
+    @for (item of dataToShow(); track item.id) {
       <app-to-do-list-task [id]=item.id content="{{ item.content }}"></app-to-do-list-task>
     } @empty {
       <p class="to-do-list__empty-message">
