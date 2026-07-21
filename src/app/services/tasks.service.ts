@@ -9,11 +9,11 @@ export class TasksService {
   private _tasks = signal<Task[]>(this.getTasksFromLocalStorage())
   readonly tasks = this._tasks.asReadonly()
   readonly totalTasks = computed(() => this._tasks().length)
+  readonly doneTasks = computed(() => this.countTasksDone())
 
   constructor() {
-    effect(() => {
-      localStorage.setItem(this.toDoListKey, JSON.stringify(this._tasks()))
-    });
+    effect(() => localStorage.setItem(this.toDoListKey, JSON.stringify(this._tasks()))
+    );
   }
 
   private getTasksFromLocalStorage(): Task[] {
@@ -61,5 +61,14 @@ export class TasksService {
           : task
       )
     )
+  }
+
+  private countTasksDone(): number {
+    let counter: number = 0
+    this._tasks().forEach(task => {
+      if (task.isChecked) counter++
+    })
+
+    return counter
   }
 }

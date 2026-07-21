@@ -20,25 +20,17 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
   templateUrl: './to-do-list.component.html',
   styleUrl: './to-do-list.component.scss'
 })
-export class ToDoListComponent implements OnInit{
-  constructor(private taskService: TasksService ) {
-  }
-
-  ngOnInit() {
-  }
-
+export class ToDoListComponent{
   protected readonly tasksList = this.taskService.tasks
   private searchQuery: WritableSignal<string> = signal('')
-
-
+  protected task: string | undefined
   protected dataToShow= computed(() => {
     return this.tasksList().filter(task => {
       return task.content.toLowerCase().includes(this.searchQuery().toLowerCase())
     })
   })
 
-
-  protected task: string | undefined
+  constructor(private taskService: TasksService ) {}
 
   protected addTask() {
     if (this.task === undefined || this.task === '' || this.task === null) return
@@ -50,5 +42,4 @@ export class ToDoListComponent implements OnInit{
   protected onInput(value: string) {
     this.searchQuery.set(value)
   }
-
 }
