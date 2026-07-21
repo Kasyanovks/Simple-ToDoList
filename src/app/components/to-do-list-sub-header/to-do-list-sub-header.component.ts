@@ -13,6 +13,7 @@ export class ToDoListSubHeaderComponent {
   }
 
   protected total = this.taskService.totalTasks
+  protected done = this.taskService.doneTasks
 
 
   deleteTasks() {

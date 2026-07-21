@@ -1,5 +1,5 @@
 import {computed, effect, Injectable, signal} from '@angular/core';
-import { Task } from "../models/task";
+import {Task} from "../models/task";
 
 @Injectable({
   providedIn: 'root'
@@ -9,14 +9,14 @@ export class TasksService {
   private _tasks = signal<Task[]>(this.getTasksFromLocalStorage())
   readonly tasks = this._tasks.asReadonly()
   readonly totalTasks = computed(() => this._tasks().length)
+  readonly doneTasks = computed(() => this.countTasksDone())
 
   constructor() {
-    effect(() => {
-      localStorage.setItem(this.toDoListKey, JSON.stringify(this._tasks()))
-    });
+    effect(() => localStorage.setItem(this.toDoListKey, JSON.stringify(this._tasks()))
+    );
   }
 
-  private getTasksFromLocalStorage(): Task[]{
+  private getTasksFromLocalStorage(): Task[] {
     const taskString = localStorage.getItem(this.toDoListKey)
 
     if (!taskString) return [] as Task[]
@@ -34,8 +34,7 @@ export class TasksService {
     if (this._tasks().length === 0) {
       this._tasks.set([task])
       localStorage.setItem(this.toDoListKey, JSON.stringify(this._tasks()))
-    }
-    else {
+    } else {
       this._tasks.update(t => ([
         ...t,
         task
@@ -50,15 +49,26 @@ export class TasksService {
   }
 
   deleteTask(id: string) {
-    this._tasks.set(this._tasks().filter(task => {
-      return task.id !== id
-    }))
+    this._tasks.update(tasks => tasks.filter(task => task.id !== id)
+    )
   }
 
   toggleCheckTask(id: string) {
-    this._tasks.set(this._tasks().map(task => {
-      if (task.id === id) task.isChecked = !task.isChecked
-      return task
-    }))
+    this._tasks.update(tasks =>
+      tasks.map(task =>
+        task.id === id
+          ? {...task, isChecked: !task.isChecked}
+          : task
+      )
+    )
+  }
+
+  private countTasksDone(): number {
+    let counter: number = 0
+    this._tasks().forEach(task => {
+      if (task.isChecked) counter++
+    })
+
+    return counter
   }
 }
