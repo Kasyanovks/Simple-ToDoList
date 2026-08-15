@@ -1,22 +1,25 @@
-import {Component, Input, signal} from '@angular/core';
-import {TasksService} from "../../services/tasks.service";
+import {Component, inject} from '@angular/core';
+import {TodoRepository} from "../../repositories/todo.repository";
+import {AsyncPipe} from "@angular/common";
 
 @Component({
   selector: 'app-to-do-list-sub-header',
   standalone: true,
-  imports: [],
+  imports: [
+    AsyncPipe
+  ],
   templateUrl: './to-do-list-sub-header.component.html',
   styleUrl: './to-do-list-sub-header.component.scss'
 })
 export class ToDoListSubHeaderComponent {
-  constructor(protected taskService: TasksService) {
-  }
 
-  protected total = this.taskService.totalTasks
-  protected done = this.taskService.doneTasks
+  private tasksRepo = inject(TodoRepository)
+
+  protected total$ = this.tasksRepo.totalTasks$
+  protected done$ = this.tasksRepo.doneTasks$
 
 
   deleteTasks() {
-    this.taskService.deleteAllTasks()
+    this.tasksRepo.clearTaskList()
   }
 }

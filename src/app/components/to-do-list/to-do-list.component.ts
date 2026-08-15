@@ -1,10 +1,10 @@
-import {Component, signal, OnInit, Input, WritableSignal, computed, Signal} from '@angular/core';
+import {Component, signal, computed, inject} from '@angular/core';
 import {ToDoListSubHeaderComponent} from "../to-do-list-sub-header/to-do-list-sub-header.component";
 import {ToDoListTaskComponent} from "../to-do-list-task/to-do-list-task.component";
-import {Task} from "../../models/task";
-import {TasksService} from "../../services/tasks.service";
 import {BlackButtonComponent} from "../black-button/black-button.component";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {TodoRepository} from "../../repositories/todo.repository";
+import {toSignal} from "@angular/core/rxjs-interop";
 
 
 @Component({
@@ -20,26 +20,30 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
   templateUrl: './to-do-list.component.html',
   styleUrl: './to-do-list.component.scss'
 })
-export class ToDoListComponent{
-  protected readonly tasksList = this.taskService.tasks
-  private searchQuery: WritableSignal<string> = signal('')
-  protected task: string | undefined
-  protected dataToShow= computed(() => {
-    return this.tasksList().filter(task => {
-      return task.content.toLowerCase().includes(this.searchQuery().toLowerCase())
-    })
+export class ToDoListComponent {
+  protected tasksRepo = inject(TodoRepository)
+  private input = signal('')
+  protected task: string = '';
+  protected tasks = toSignal(this.tasksRepo.showTasks$, {
+    initialValue: []
+  })
+  protected tasksToShow = computed(() => {
+    return this.tasks().filter(task =>
+      task.title.toLowerCase().includes(this.input().toLowerCase())
+    )
   })
 
-  constructor(private taskService: TasksService ) {}
-
-  protected addTask() {
-    if (this.task === undefined || this.task === '' || this.task === null) return
-
-    this.taskService.addNewTask(Date.now().toString(36) + Math.random().toString(36).substr(2, 5), this.task!, false)
-    this.task = ''
+  onInput(value: string) {
+    this.input.set(value)
   }
 
-  protected onInput(value: string) {
-    this.searchQuery.set(value)
+  addTask() {
+    if (this.task === '' || this.task === undefined) {
+      alert('Вы ничего не ввели или ввели некорректные данные');
+      this.task = ''
+    } else {
+      this.tasksRepo.addNewTask(this.task)
+      this.task = ''
+    }
   }
 }

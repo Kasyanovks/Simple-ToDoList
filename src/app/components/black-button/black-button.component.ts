@@ -1,5 +1,4 @@
 import {Component, Input} from '@angular/core';
-import {TasksService} from "../../services/tasks.service";
 
 @Component({
   selector: 'app-black-button',
@@ -9,9 +8,6 @@ import {TasksService} from "../../services/tasks.service";
   styleUrl: './black-button.component.scss'
 })
 export class BlackButtonComponent {
-  constructor(private taskService: TasksService) {
-  }
-
   @Input({required: true}) buttonText!: string
   @Input({required: true}) type!: string
 }

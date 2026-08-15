@@ -1,5 +1,6 @@
-import {Component, Input} from '@angular/core';
-import {TasksService} from "../../services/tasks.service";
+import {Component, inject, input} from '@angular/core';
+import {TodoRepository} from "../../repositories/todo.repository";
+import {ITask} from "../../models/task.interface";
 
 @Component({
   selector: 'app-to-do-list-task',
@@ -9,18 +10,16 @@ import {TasksService} from "../../services/tasks.service";
   styleUrl: './to-do-list-task.component.scss'
 })
 export class ToDoListTaskComponent {
-  constructor(protected taskService: TasksService) {
-  }
+  protected tasks = inject(TodoRepository)
 
-  @Input() id!: string
-  @Input() content!: string
-  @Input() isChecked!: boolean
+  public task = input<ITask>()
+
 
   protected checkedOrNot(id: string) {
-    this.taskService.toggleCheckTask(id)
+    this.tasks.checkTask(id)
   }
 
   protected delete(id: string) {
-    this.taskService.deleteTask(id)
+    this.tasks.deleteTask(id)
   }
 }
