@@ -1,4 +1,4 @@
-import {Component, inject} from '@angular/core';
+import {ChangeDetectionStrategy, Component, inject} from '@angular/core';
 import {TodoRepository} from "../../repositories/todo.repository";
 import {AsyncPipe} from "@angular/common";
 
@@ -9,7 +9,8 @@ import {AsyncPipe} from "@angular/common";
     AsyncPipe
   ],
   templateUrl: './to-do-list-sub-header.component.html',
-  styleUrl: './to-do-list-sub-header.component.scss'
+  styleUrl: './to-do-list-sub-header.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ToDoListSubHeaderComponent {
 

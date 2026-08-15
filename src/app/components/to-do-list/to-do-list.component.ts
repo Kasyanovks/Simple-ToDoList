@@ -1,4 +1,4 @@
-import {Component, signal, computed, inject} from '@angular/core';
+import {Component, signal, computed, inject, ChangeDetectionStrategy} from '@angular/core';
 import {ToDoListSubHeaderComponent} from "../to-do-list-sub-header/to-do-list-sub-header.component";
 import {ToDoListTaskComponent} from "../to-do-list-task/to-do-list-task.component";
 import {BlackButtonComponent} from "../black-button/black-button.component";
@@ -18,7 +18,8 @@ import {toSignal} from "@angular/core/rxjs-interop";
     ReactiveFormsModule,
   ],
   templateUrl: './to-do-list.component.html',
-  styleUrl: './to-do-list.component.scss'
+  styleUrl: './to-do-list.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ToDoListComponent {
   protected tasksRepo = inject(TodoRepository)

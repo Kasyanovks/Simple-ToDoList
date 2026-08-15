@@ -1,4 +1,4 @@
-import {Component, inject, input} from '@angular/core';
+import {ChangeDetectionStrategy, Component, inject, input} from '@angular/core';
 import {TodoRepository} from "../../repositories/todo.repository";
 import {ITask} from "../../models/task.interface";
 
@@ -7,7 +7,8 @@ import {ITask} from "../../models/task.interface";
   standalone: true,
   imports: [],
   templateUrl: './to-do-list-task.component.html',
-  styleUrl: './to-do-list-task.component.scss'
+  styleUrl: './to-do-list-task.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ToDoListTaskComponent {
   protected tasks = inject(TodoRepository)
