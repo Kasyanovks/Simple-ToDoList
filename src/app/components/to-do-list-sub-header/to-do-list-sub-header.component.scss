@@ -3,7 +3,7 @@
 
 :host {
   display: flex;
-  align-items: center;
+  align-items: start;
   justify-content: space-between;
   width: 100%;
   font-weight: 600;
@@ -15,5 +15,18 @@
 
   &:hover {
     color: palette.$gray-color-2;
+  }
+}
+
+.sub-header {
+  display: grid;
+  gap: 10px;
+
+  &__select-filter {
+    width: 100%;
+    border: var.$border;
+    border-radius: var.$border-radius;
+    outline: none;
+    font-weight: 400;
   }
 }

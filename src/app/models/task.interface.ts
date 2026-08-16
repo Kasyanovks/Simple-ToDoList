@@ -3,3 +3,7 @@ export interface ITask {
   title: string
   isChecked: boolean
 }
+
+export interface IToDoProps {
+  filter: 'ALL' | 'ACTIVE' | 'COMPLETED'
+}

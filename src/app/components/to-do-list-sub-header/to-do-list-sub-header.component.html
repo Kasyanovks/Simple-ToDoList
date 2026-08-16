@@ -1,2 +1,9 @@
-<p class="to-do-list__total-tasks">Total tasks: {{ done$ | async }}/{{ total$ | async }}</p>
+<div class="to-do-list__sub-header sub-header">
+  <p class="sub-header__total-tasks">Total tasks: {{ done$ | async }}/{{ total$ | async }}</p>
+  <select name="filter" class="sub-header__select-filter" (change)="toDoShow($event)">
+    @for (item of selectFields; track item.value) {
+      <option [value]="item.value" class="sub-header__select-option">{{ item.value }}</option>
+    }
+  </select>
+</div>
 <button class="to-do-list__delete-all" (click)="deleteTasks()">Delete All</button>

@@ -25,7 +25,7 @@ export class ToDoListComponent {
   protected tasksRepo = inject(TodoRepository)
   private input = signal('')
   protected task: string = '';
-  protected tasks = toSignal(this.tasksRepo.showTasks$, {
+  protected tasks = toSignal(this.tasksRepo.visibleTodo$, {
     initialValue: []
   })
   protected tasksToShow = computed(() => {
